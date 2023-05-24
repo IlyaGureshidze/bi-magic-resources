@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>window.Promise || document.write('<scr'+'ipt src="es6-promise.auto.js"></sc'+'ript>');</script>
+  <script src="bixel.js"></script>
+
+</head>
+<style>
+  html, body {
+    margin: 0;
+    font-size: 13px;
+    min-height: 100%;
+  }
+  #wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  .elements {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.25rem;
+  }
+  .element {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .element:last-child{
+    margin-bottom: 0;
+  }
+  .element .title {
+    flex: 0 0 auto;
+    max-width: 70%;
+    width: 100%;
+  }
+  .element .value {
+    flex: 0 0 auto;
+    max-width: 30%;
+    padding: 0.5rem 0.25rem;
+    width: 100%;
+    border: 1px solid #7ba7db;
+    text-align:center;
+  }
+</style>
+
+<body>
+<main id="wrapper">
+  <div class="elements" id="target"></div>
+</main>
+
+<script>
+  let dashlet, config, ms, ls, ps, M, L, P, data, axes, xs, ys, zs;
+  // Первоначальный инит библиотеки. Обычно нужен для разовой предварительной настройки компонента и чтении конфига дешлета
+  bixel.init({
+    zsCount: 1,
+  }).then(function(d) {dashlet = d; config = dashlet.config || {}});
+
+  // Данных нет, или не указаны важные ключи в конфиге дешлета. Нужен для заглушки типа Нет данных
+  bixel.on('no-data', function(axes) {
+    // no data
+  });
+  // Событие триггерится каждый раз, когда вы выставляете фильтр вручную или через управляющий деш. И когда данные есть
+  bixel.on('load', function (d, a) {
+    data = d;
+    axes = a;
+    xs = axes.getXs();
+    ys = axes.getYs();
+    zs = axes.getZs();
+// Просто функция, которая отвечает за основной рендер. Учитывайте, что событие load может происходить часто, потому не забывайте очищать контейнер перед вставкой в DOM
+    _render();
+  });
+
+  function _render() {
+    const y = ys[0]
+    const z = zs[0];
+    console.log(xs, ys, zs, data);
+    const container = document.getElementById('target');
+    container.innerHTML = "";
+    xs.map(x => {
+      let element = document.createElement('div');
+      let title = document.createElement('div');
+
+      element.setAttribute('class', 'element');
+      title.setAttribute('class', 'title');
+
+      title.innerHTML = x.title;
+
+      element.appendChild(title);
+      ys.map(y => {
+        let value = document.createElement('div');
+
+        value.setAttribute('class', 'value');
+
+        value.innerHTML = !isNaN(data.getValue(x, y, z).valueOf()) ? data.getValue(x, y, z).valueOf() : 0;
+
+        element.appendChild(value);
+
+      })
+      container.appendChild(element);
+      //title.innerHTML = xs
+    })
+
+    console.log(data.getValue(xs[0], y, z));
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){ // Аналог $(document).ready(function(){
+    document.getElementById('wrapper').addEventListener('click', function(event) {
+      console.log(config);
+      if (config.hasOwnProperty('onClickDataPoint')) {
+        // Прокидываем обработчик встроенной логики клика по элементу графика onClickDataPoint
+        bixel.invoke('CLICK_DATA_POINT', {
+          x_id: xs[0].id,
+          y_id: ys[0].id,
+          z_id: zs[0].id,
+          event: { pageX: event.pageX, pageY: event.pageY },
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>

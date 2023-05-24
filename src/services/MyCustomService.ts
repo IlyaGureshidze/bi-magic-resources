@@ -32,7 +32,12 @@ export class MyCustomService extends BaseService<IMyCustomModel> {
           min = {...el};
         }
       })
-      const urlState = UrlState.getInstance();
+      this._updateWithData({
+        loading: false,
+        data,
+        min
+      });
+     const urlState = UrlState.getInstance();
       if (!urlState?.getModel()?._myCustomFilters?.[String(this.id)]) {
         urlState.updateModel({
           _myCustomFilters: {
@@ -45,15 +50,15 @@ export class MyCustomService extends BaseService<IMyCustomModel> {
         });
       }
     });
-    UrlState.getInstance().subscribeAndNotify('_myCustomFilters', this._onUrlUpdated);
+   UrlState.getInstance().subscribeAndNotify('_myCustomFilters', this._onUrlUpdated);
   }
 
   private _onUrlUpdated = (model) => {
     if (model.loading || model.error) return;
 
     this._updateWithData({
-      data: model._myCustomFilters[String(this.id)].data,
-      min: model._myCustomFilters[String(this.id)].min
+      data: model._myCustomFilters?.[String(this.id)]?.data || [],
+      min: model._myCustomFilters?.[String(this.id)]?.min || {name: "", value: 0}
     });
   }
 /*

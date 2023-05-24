@@ -26,37 +26,10 @@ const AnimatedText = (props) => {
               fontWeight: 'bold',
               lineDash: [0, 200],
               lineDashOffset: 0,
-              fill: 'transparent',
+              fill: 'black',
               stroke: '#000',
               lineWidth: 1
             },
-            keyframeAnimation: {
-              duration: 3000,
-              loop: true,
-              keyframes: [
-                {
-                  percent: 0.7,
-                  style: {
-                    fill: 'transparent',
-                    lineDashOffset: 200,
-                    lineDash: [200, 0]
-                  }
-                },
-                {
-                  // Stop for a while.
-                  percent: 0.8,
-                  style: {
-                    fill: 'transparent'
-                  }
-                },
-                {
-                  percent: 1,
-                  style: {
-                    fill: 'black'
-                  }
-                }
-              ]
-            }
           }
         ]
       }
@@ -69,11 +42,10 @@ const AnimatedText = (props) => {
         });
       }
       chart.setOption(config);
+      chart.resize();
     }
   }
-
   if (myCustomSrvc.getModel().loading || myCustomSrvc.getModel().error) return null;
-
   return (
     <div ref={onChartCreated} className="AnimatedText" style={{width: '100%', height: '100%'}}></div>
   );
