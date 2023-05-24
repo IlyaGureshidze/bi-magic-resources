@@ -76,7 +76,6 @@ module.exports = {
     'bi-internal/face': 'bi-internal/face',
     'bi-internal/root': 'bi-internal/root',
     'bi-internal/types': 'bi-internal/types',
-    'bi-internal/shell': 'bi-internal/shell',
     'bi-internal/services': 'bi-internal/services',
     'bi-internal/utils': 'bi-internal/utils',
     'bi-internal/ds-helpers': 'bi-internal/ds-helpers',
