@@ -1,4 +1,5 @@
 {
   "port": 3003,
-  "server": ""
+  "server": "https://tune15.class.luxmsbi.com/",
+  "noRemove": true
 }

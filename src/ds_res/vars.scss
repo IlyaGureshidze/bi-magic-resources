@@ -1,0 +1,218 @@
+/*!
+    common variables/functions/settings
+    can be overrided via skin.json
+ */
+
+// переменные из темы
+$color1: var(--color1);
+$color2: var(--color2);
+$color3: var(--color3);
+$color4: var(--color4);
+$color5: var(--color5);
+$color6: var(--color6);
+$color7: var(--color7);
+$color8: var(--color8);
+$color9: var(--color9);
+$color10: var(--color10);
+$color11: var(--color11);
+$color12: var(--color12);
+$color13: var(--color13);
+$color14: var(--color14);
+$color15: var(--color15);
+$color16: var(--color16);
+$color17: var(--color17);
+$color18: var(--color18);
+$color19: var(--color19);
+$color20: var(--color20);
+$color_conditions: var(--color_conditions);
+$shadow_button: var(--shadow_button);
+$shadowS: var(--shadow-s);
+$shadowB: var(--shadow-b);
+$shadow_dash: var(--shadow_dash);
+$shadow_panel: var(--shadow_panel);
+$panel_push-up: var(--panel_push-up);
+$panel_push-down: var(--panel_push-down);
+$info: var(--info);
+$system_panel:  var(--system_panel);
+$system_background:  var(--system_background);
+$system_effect:  var(--system_effect);
+$system_selection: var(--system_selection);
+$system_element:  var(--system_element);
+$neutral_300:  var(--neutral_300);
+$neutral_400:  var(--neutral_400);
+$neutral_500:  var(--neutral_500);
+$neutral_600:  var(--neutral_600);
+$neutral_700:  var(--neutral_700);
+$neutral_800:  var(--neutral_800);
+$neutral_900:  var(--neutral_900);
+$neutral_white:  var(--neutral_white);
+$active_firstdefault:  var(--active_firstdefault);
+$active_firsthover:  var(--active_firsthover);
+$active_firstcontrast: var(--active_firstcontrast);
+$active_secondcontrast:  var(--active_secondcontrast);
+$active_seconddefault:  var(--active_seconddefault);
+$active_secondhover:  var(--active_secondhover);
+$active_secondeffect:  var(--active_secondeffect);
+$state_success:  var(--state_success);
+$state_warning: var(--state_warning);
+$state_error:  var(--state_error);
+$disabled: var(--disabled);
+
+
+// Это надо выборочно поудалять
+
+$chess: linear-gradient(to top right, $color2 25%, transparent 25%, transparent 75%, $color2 75%, $color2),
+linear-gradient(to top right, $color2 25%, transparent 25%, transparent 75%, $color2 75%, $color2);
+
+$main-color:                            $color6             !default;
+$active-color-1:                        $color8             !default;
+
+$rounded-corner:                        0.5rem              !default;
+$main-font-family:                      'Golos UI'          !default;
+$main-font-size:                        16px                !default;
+$font:                                  $main-font-size $main-font-family, "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+
+// sizes
+$dlg-auth-width:                        610px               !default;
+$dlg-auth-height:                       319px               !default;
+$VizelDashlet-header-height:            33px                !default;
+$shell-header-height:                   46px                !default;
+$shell-dataset-title-height:            29px                !default;
+$horizontal-panel-width:                350px               !default;
+$periods-panel-height:                  77px                !default;
+$periods-panel-top-offset:              calc(#{$shell-header-height} + #{$shell-dataset-title-height}) !default;
+$dashboards-header-height:              40px                !default;
+$periods-panel-height-x2:               120px               !default;
+$header-height:                         40px                !default;
+
+
+
+$light:         #A8DADC !default;
+$red:           #960200 !default;
+$green:         #5BA221 !default;
+$yellow:        #F3DE2C !default;
+$background:    #FFFFFF !default;
+
+// 455a64
+
+$active-color:                          #64b5f6             !default;
+$shell-header-color:                    #ffffff             !default;
+$shell-header-gradient-start:           #575757             !default;
+$shell-header-gradient-end:             #232323             !default;
+$shell-dataset-title-background:        #000000             !default;
+
+$dashboard-bg-color: #f9f9f9; // цвет заглушки правого меню для скрытия скролла дашбордов под ней
+
+// behaviour
+$shell-header-display-logo:             true                !default;
+$shell-header-display-logout:           true                !default;
+$shell-header-display-toolbar:          true                !default;
+$hasFullMainToolbar:                    false               !default;
+
+// will be available to in code
+:export {
+  hasFullMainToolbar: $hasFullMainToolbar;
+  mainFontFamily: $main-font-family;
+  mainFontSize: $main-font-size;
+  mainColor: $main-color;
+  font: $font;
+}
+
+// mixins...
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  transform: $property;
+}
+
+@mixin transition-transform($duration) {
+  -webkit-transition-duration: $duration;
+  -moz-transition-duration: $duration;
+  -ms-transition-duration: $duration;
+  -o-transition-duration: $duration;
+  transition-duration: $duration;
+
+  -webkit-transition-property: -webkit-transform, rotateY;
+  -moz-transition-property: -moz-transform, rotateY;
+  -ms-transition-property: -ms-transform, rotateY;
+  -o-transition-property: -o-transform, rotateY;
+  transition-property: transform, rotateY;
+}
+
+@mixin magic-center() {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  @include transform(translate(-50%, -50%));
+}
+
+@mixin gradient ($startColor: #eee, $endColor: white) {
+  background: $startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+  background: -webkit-linear-gradient(top, $startColor, $endColor);
+  background: -moz-linear-gradient(top, $startColor, $endColor);
+  background: -ms-linear-gradient(top, $startColor, $endColor);
+  background: -o-linear-gradient(top, $startColor, $endColor);
+  background: linear-gradient(to bottom, $startColor, $endColor);
+}
+
+@mixin error-background() {
+  //background: repeating-linear-gradient(-45deg, #ffcdd2, #ffcdd2 10px, #ffdede 10px, #ffdede 20px);
+  //color: red;
+  background: #4F4F9B;
+  color: $color3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  white-space: pre-wrap;
+  overflow: auto;
+  font-size: 0.8rem;
+  &:before {
+    content: "ʕ •̀ o •́ ʔ";
+    font-size: 200%;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@mixin dots-preloader() {
+  position: relative;
+  > * { opacity: 0.7;  }
+  &::after {
+    display: block;
+    position: absolute;
+    content: ' ';
+    left: 50%;
+    top: 4px;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 2px;
+    max-width: 270px;
+    background-image: var(--loading-gif);
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+  }
+  &.loadingFirstTime::after {
+    top: 50%;
+  }
+}
+
+@mixin mini-scroll() {
+  &::-webkit-scrollbar-track { border-radius: 3px; }
+  &::-webkit-scrollbar { width: 5px; height: 5px; }
+  &::-webkit-scrollbar-thumb {border-radius: 3px; background: rgba(0, 0, 0, 0.5); border: 1px solid $color7; }
+  &::-webkit-scrollbar-corner { background: $color2 }
+}
+
+@mixin scrollbar() {
+  scrollbar-gutter: auto;
+  &::-webkit-scrollbar-track { border-radius: 0.5rem; }
+  &::-webkit-scrollbar { width: 0.5rem;  height: 0.5rem;  border-radius: 0.5rem; }
+  &::-webkit-scrollbar-thumb { border-radius: 0.5rem;  background: $color5; border: 1px solid $color_conditions; };
+}

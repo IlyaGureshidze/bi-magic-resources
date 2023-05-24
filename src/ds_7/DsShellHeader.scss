@@ -1,0 +1,98 @@
+@import '../ds_res/vars.scss';
+
+.DsShellHeader {
+  //position: absolute;
+  //left: 0;
+  //top: 0;
+  //right: 0;
+  //height: $shell-header-height;
+  height: 3.7rem;
+
+  // @include gradient($shell-header-gradient-start, $shell-header-gradient-end);
+  // max-height: $shell-header-height;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  // all children
+  > * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+
+  .DsShellHeader__Toolbar {
+    flex: 2 100%;
+    flex-grow: 1;
+    position: relative;
+  }
+}
+
+
+.DsShellHeader__Logo {  flex-grow: 0; flex-shrink: 0; vertical-align: middle; text-overflow: clip; }
+.DsShellHeader__LogoLink { display: flex; align-items: center; justify-content: center;  padding: 0 10px; height: 100%;  color: $shell-header-color; text-decoration: none; }
+.DsShellHeader__LogoLink:hover { text-decoration: none; }
+
+.DsShellHeader {
+  .Header__Inner {
+  background: $system_panel;
+  }
+}
+.MainToolbar {
+  @if $shell-header-display-toolbar == false {
+    display: none;
+  }
+
+  .bi-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+
+    svg {
+      height: 62%;
+      width: 62%;
+      fill: $color6;
+      //stroke: $color6;
+      stroke: none;
+    }
+
+    &:hover, &.active {
+      box-shadow: $shadow_button;
+    }
+  }
+}
+
+.AccountList__Item { white-space: nowrap; }
+
+.AppPane__content {
+  border-top: none;
+}
+.Menu__Separator {
+  margin: 1rem 0;
+}
+.AppSider.custom {
+  .AppPane__headerContainer {
+    margin-bottom: 0.5rem;
+  }
+  .AppPane__logoBox {
+    svg {
+      height: 2rem;
+    }
+  }
+  .dashboard {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden auto;
+    position: relative;
+    scrollbar-gutter: stable both-edges;
+  }
+}
+
