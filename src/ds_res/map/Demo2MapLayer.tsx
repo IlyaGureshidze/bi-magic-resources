@@ -4,6 +4,9 @@ import './layerStyle.scss';
 import ReactDOM from "react-dom";
 import {getWeatherIcon, getWeatherIconString, getOtherIconString, getOtherIcon, getSectorPath, menuItems, randomInteger} from "./utils";
 import {gyjson} from './demoData';
+import {IVizelConfig, ISubspace} from 'bi-internal/defs/bi';
+import {IDataProvider} from 'bi-internal/utils';
+
 interface IDemoLayerProps{
   dp: IDataProvider;
   cfg: IVizelConfig;
@@ -200,7 +203,7 @@ const AnimMapLayer: React.FC = (props: IDemoLayerProps): boolean => {
     });
   }, []);
 
-  // Сохраняем субсейс и объект карты
+  // Сохраняем субспейс и объект карты
   useEffect(() => {
     if (props.map && props.subspace) {
       const newState = {

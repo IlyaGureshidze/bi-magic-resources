@@ -1,6 +1,7 @@
 import React, {Component, useState, useEffect} from 'react';
-import {L} from 'bi-internal/utils'; //  библиотека leaflet из утилс
+import {L, IDataProvider} from 'bi-internal/utils'; //  библиотека leaflet из утилс
 import ReactDOM from 'react-dom';
+import {IVizelConfig, ISubspace} from 'bi-internal/defs/bi';
 
 interface IDemoLayerProps{
   dp: IDataProvider;
